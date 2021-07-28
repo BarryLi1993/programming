@@ -38,10 +38,15 @@ public class BinaryTree {
         // 广度优先遍历（队列）
         breathLoop(root);
 
-        // 先序递归遍历
-        firstLoop(root);
+//        // 先序递归遍历
+//        firstLoop(root);
+//
+//        // 先序遍历（栈）
+//        firstLoopStack(root);
 
-        firstLoopStack(root);
+        mirror(root);
+
+        breathLoop(root);
     }
 
     public static void breathLoop(TreeNode root) {
@@ -51,7 +56,7 @@ public class BinaryTree {
         }
         while (!queue.isEmpty()) {
             TreeNode headNode = queue.poll();
-            System.out.println(headNode.val);
+            System.out.print(headNode.val);
             if (headNode.left != null) {
                 queue.offer(headNode.left);
             }
@@ -83,6 +88,25 @@ public class BinaryTree {
                 cur = cur.right;
             }
         }
+    }
+
+    public static void mirror(TreeNode root) {
+        if (root!=null){
+            TreeNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+            mirror(root.left);
+            mirror(root.right);
+        }
+    }
+
+    private static boolean hasNoLeafNode(TreeNode node) {
+        if (node == null) {
+            return true;
+        } else if (node.left == null && node.right == null) {
+            return true;
+        }
+        return false;
     }
 
 //    public static void breathLoop(TreeNode root) {
